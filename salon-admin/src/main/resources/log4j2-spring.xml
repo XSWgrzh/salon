@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，
+当设置成trace时，可以看到log4j2内部各种详细输出
+-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration status="INFO" monitorInterval="300">
+	<!--日志级别以及优先级排序:
+    OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+    -->
+
+	<!--变量配置-->
+	<Properties>
+		<!--
+            格式化输出：
+            %d表示日期，
+            %thread表示线程名，
+            %-5level：级别从左显示5个字符宽度
+            %msg：日志消息，%n是换行符
+        -->
+		<!--
+        %logger{36} 表示 Logger 名字最长36个字符
+        -->
+		<property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight{%-5level}[%thread] %style{%logger{36}}{cyan} : %msg%n" />
+
+		<!-- 定义日志存储的路径，不要配置相对路径 -->
+		<property name="FILE_PATH" value="logs/salon-admin" />
+		<property name="FILE_NAME" value="salon-admin" />
+		<property name="FILE_SIZE" value="50" />
+		<property name="FILE_INDEX" value="15" />
+	</Properties>
+
+	<appenders>
+		<console name="Console" target="SYSTEM_OUT">
+			<!--输出日志的格式-->
+			<PatternLayout pattern="${LOG_PATTERN}" disableAnsi="false" noConsoleNoAnsi="false"/>
+
+			<!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+			<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+
+		</console>
+
+		<!-- for 3rdparty -->
+		<RollingFile name="3rdparty"
+					 fileName="${sys:GW_HOME}/log/${sys:APP_NAME}_3rdparty.log"
+					 filePattern="${sys:GW_HOME}/log/3rdparty_backup/${sys:APP_NAME}_3rdparty.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+		<!-- for salon_dubbo -->
+		<RollingFile name="salon_dubbo"
+					 fileName="${sys:GW_HOME}/log/${sys:APP_NAME}_dubbo.log"
+					 filePattern="${sys:GW_HOME}/log/dubbo_backup/${sys:APP_NAME}_dubbo.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+		<!-- for nacos -->
+		<RollingFile name="salon_nacos"
+					 fileName="${sys:GW_HOME}/log/${sys:APP_NAME}_nacos.log"
+					 filePattern="${sys:GW_HOME}/log/zookeeper_backup/${sys:APP_NAME}_nacos.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+		<!-- for salon_app -->
+		<RollingFile name="salon_app" fileName="${sys:GW_HOME}/log/${sys:APP_NAME}.log"
+					 filePattern="${sys:GW_HOME}/log/log_backup/${sys:APP_NAME}.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+
+		<!-- for com.saloncloud.gw.redis -->
+		<RollingFile name="salon_redis"
+					 fileName="${sys:GW_HOME}/log/${sys:APP_NAME}_redis.log"
+					 filePattern="${sys:GW_HOME}/log/redis_backup/${sys:APP_NAME}_redis.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+		<!-- for com.saloncloud.gw.sql -->
+		<RollingFile name="salon_sql"
+					 fileName="${sys:GW_HOME}/log/${sys:APP_NAME}_sql.log"
+					 filePattern="${sys:GW_HOME}/log/sql_backup/${sys:APP_NAME}_sql.log.%i.gz"
+					 bufferedIO="true" bufferSize="8192" immediateFlush="false">
+
+			<PatternLayout pattern="[%d{MM-dd HH:mm:ss,SSS}] [%-5p] [%t] [%c] %m%n"
+						   header="\n\n########################################################################\n Module Name    : ${sys:APP_NAME} \n Module Version : ${sys:VERSION} \n Launched Time  : %d{yyyy-MM-dd HH:mm:ss} \n########################################################################\n\n\n" />
+
+			<Policies>
+				<OnStartupTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="${FILE_SIZE} MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="${FILE_INDEX}" fileIndex="min" />
+		</RollingFile>
+
+		<Async name="async_3rdparty">
+			<AppenderRef ref="3rdparty" />
+		</Async>
+
+	</appenders>
+
+	<!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
+	<!--然后定义loggers，只有定义了logger并引入的appender，appender才会生效-->
+	<loggers>
+		<logger name="org.springframework" level="INFO">
+		</logger>
+		<logger name="org.mybatis" level="INFO">
+		</logger>
+		<Logger name="org.eclipse.jetty" level="warn" />
+		<Logger name="com.alibaba.dubbo.remoting" level="off" />
+		<Logger name="com.alibaba.dubbo.monitor" level="off" />
+
+		<!-- dubbo -->
+		<Logger name="org.apache.dubbo" level="debug"
+				additivity="false">
+			<AppenderRef ref="salon_dubbo" />
+		</Logger>
+
+		<!-- nacos -->
+		<Logger name="com.alibaba.nacos" level="info"
+				additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!-- APP -->
+		<Logger name="com.salon.admin" level="debug"
+                additivity="false">
+			<AppenderRef ref="Console" />
+		</Logger>
+
+		<!-- Root -->
+		<Root level="all">
+			<appender-ref ref="Console" />
+			<AppenderRef ref="async_3rdparty" />
+		</Root>
+	</loggers>
+
+</configuration>

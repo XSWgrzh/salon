@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: salon-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${NACOS_ADDRESS}
+      config:
+        server-addr: ${NACOS_ADDRESS}
+        namespace: salon
+        file-extension: yml
+        shared-configs[0]:
+          data-id: salon-gateway.yml
+          refresh: true
+          group: DEFAULT_GROUP
+        shared-configs[1]:
+          data-id: common.yml
+          group: DEFAULT_GROUP
+          refresh: true

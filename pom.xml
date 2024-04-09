@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.salon</groupId>
+    <artifactId>salon</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <modules>
+        <module>salon-gateway</module>
+        <module>salon-admin</module>
+        <module>salon-auth</module>
+        <module>salon-common</module>
+        <module>salon-common/salon-common-db</module>
+        <module>salon-client</module>
+    </modules>
+
+    <properties>
+        <salon.version>1.0.0</salon.version>
+        <spring-cloud.version>2022.0.0</spring-cloud.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <spring-boot.version>3.0.2</spring-boot.version>
+        <springcloud-alibaba.version>2022.0.0.0-RC1</springcloud-alibaba.version>
+        <jackson-core.version>2.5.2</jackson-core.version>
+        <fst.version>2.57</fst.version>
+        <commons-lang3.version>3.5</commons-lang3.version>
+        <mybatis-plus.version>3.5.4</mybatis-plus.version>
+        <mysql.version>8.0.29</mysql.version>
+        <druid.version>1.1.22</druid.version>
+        <encoding>UTF-8</encoding>
+        <lombok.version>1.18.24</lombok.version>
+        <redisson.version>3.27.2</redisson.version>
+        <hutool.version>5.3.7</hutool.version>
+        <java-jwt.version>3.3.0</java-jwt.version>
+        <fastjson.version>1.2.73</fastjson.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <oauth.version>2.2.5.RELEASE</oauth.version>
+        <!--        <oauth2-authorization-server.version>3.1.5</oauth2-authorization-server.version>-->
+        <oauth2-authorization-server.version>1.1.1</oauth2-authorization-server.version>
+        <spring-security-oauth2-core.version>6.1.0</spring-security-oauth2-core.version>
+        <!--swagger版本-->
+        <swagger.version>2.2.15</swagger.version>
+        <validation.version>3.0.2</validation.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-core</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-db</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-redis</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-security</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <!--  spring cloud start -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${springcloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--   序列化     -->
+            <dependency>
+                <groupId>de.ruedigermoeller</groupId>
+                <artifactId>fst</artifactId>
+                <version>${fst.version}</version>
+            </dependency>
+
+            <!--  spring cloud  end -->
+
+            <!--database start -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--database end -->
+
+            <!-- mybatis-plus begin -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- 代码自动生成工具 mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- mybatis-plus end -->
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <!-- redisson begin -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <!-- redisson end -->
+            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-authorization-server</artifactId>
+                <version>${oauth2-authorization-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-core</artifactId>
+                <version>${spring-security-oauth2-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations-jakarta</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${validation.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--    <build>-->
+    <!--        <pluginManagement>-->
+    <!--            <plugins>-->
+    <!--                <plugin>-->
+    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--                    <artifactId>maven-compiler-plugin</artifactId>-->
+    <!--                    <version>${maven-compiler-plugin.version}</version>-->
+    <!--                    <configuration>-->
+    <!--                        <source>${java.version}</source>-->
+    <!--                        <target>${java.version}</target>-->
+    <!--                    </configuration>-->
+    <!--                </plugin>-->
+    <!--            </plugins>-->
+    <!--        </pluginManagement>-->
+    <!--    </build>-->
+
+    <repositories>
+        <!--        <repository>-->
+        <!--            <id>ali</id>-->
+        <!--            <name>alimaven</name>-->
+        <!--            <url>https://maven.aliyun.com/repository/public</url>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </snapshots>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>snapshots-repo</id>-->
+        <!--            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>-->
+        <!--            <releases>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </releases>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </snapshots>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>central</id>-->
+        <!--            <url>https://repo.maven.apache.org/maven2</url>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </snapshots>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>spring-snapshots</id>-->
+        <!--            <url>http://repo.spring.io/libs-snapshot</url>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </snapshots>-->
+        <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>spring-release</id>-->
+        <!--            <name>Spring release</name>-->
+        <!--            <url>https://repo.spring.io/release</url>-->
+        <!--            <snapshots>-->
+        <!--                <enabled>true</enabled>-->
+        <!--            </snapshots>-->
+        <!--        </repository>-->
+        <repository>
+            <id>spring-snapshot</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ossrh</id>
+            <name>OSS Snapshot repository</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+</project>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>salon</artifactId>
+        <groupId>com.salon</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>salon-auth</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <!--    spring.io官网文档给出了版本1.1.0,但该版本下的spring-security-oauth2-core依赖是6.0.3，
+        这个依赖没有这个OAuth2DeviceAuthorizationResponseHttpMessageConverter类。
+        解决办法:
+        更改spring-security-oauth2-core版本至6.1.0。-->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-authorization-server</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>spring-security-oauth2-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.salon</groupId>
+            <artifactId>salon-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.salon</groupId>
+            <artifactId>salon-common-db</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.salon</groupId>
+            <artifactId>salon-common-security</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>
