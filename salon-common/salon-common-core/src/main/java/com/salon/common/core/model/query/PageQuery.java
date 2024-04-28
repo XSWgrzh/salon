@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+
 /**
  * @Author：xieshaowei
  * @Package：com.salon.common.core.model.query
@@ -24,10 +25,14 @@ public class PageQuery {
     @Min(value = 1)
     private Integer pageSize = 10;
 
+
     @Schema(name = "startTime", description = "开始时间")
     private String startTime;
 
     @Schema(name = "endTime", description = "结束时间")
     private String endTime;
 
+    public Integer getPageIndex() {
+        return (this.pageNum - 1) * pageSize;
+    }
 }

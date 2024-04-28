@@ -44,6 +44,12 @@
         <!--swagger版本-->
         <swagger.version>2.2.15</swagger.version>
         <validation.version>3.0.2</validation.version>
+        <!--rocketmq版本-->
+        <rocketmq.version>2.3.0</rocketmq.version>
+        <dubbo.version>3.2.0-beta.6</dubbo.version>
+<!--        <dubbo.version>2.2.1.RELEASE</dubbo.version>-->
+        <!--oshi版本-->
+        <oshi.version>6.5.0</oshi.version>
     </properties>
 
 
@@ -69,6 +75,21 @@
                 <artifactId>salon-common-security</artifactId>
                 <version>${salon.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-log</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-rocketmq</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.salon</groupId>
+                <artifactId>salon-common-rpc</artifactId>
+                <version>${salon.version}</version>
+            </dependency>
             <!--  spring cloud start -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -91,6 +112,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.alibaba.cloud</groupId>-->
+<!--                <artifactId>spring-cloud-starter-dubbo</artifactId>-->
+<!--                <version>${dubbo.version}</version>-->
+<!--            </dependency>-->
             <!--   序列化     -->
             <dependency>
                 <groupId>de.ruedigermoeller</groupId>
@@ -99,6 +125,12 @@
             </dependency>
 
             <!--  spring cloud  end -->
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
 
             <!--database start -->
             <dependency>
@@ -183,6 +215,16 @@
                 <groupId>jakarta.validation</groupId>
                 <artifactId>jakarta.validation-api</artifactId>
                 <version>${validation.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

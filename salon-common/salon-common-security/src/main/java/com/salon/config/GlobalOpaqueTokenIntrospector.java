@@ -27,11 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class GlobalOpaqueTokenIntrospector implements OpaqueTokenIntrospector, WebMvcConfigurer {
 
-//    @Autowired
-//    private OAuth2AuthorizationService oAuth2AuthorizationService;
-
-//    private final UserContextInterceptor userContextInterceptor;
-
     private final RedisUtil redisUtil;
 
     @Override
@@ -43,13 +38,16 @@ public class GlobalOpaqueTokenIntrospector implements OpaqueTokenIntrospector, W
             // 解密
             return decryptInfo((UserDetail) obj);
         }
-        throw OAuth2ExceptionHandler.getException(StatusCode.UNAUTHORIZED.getcode(), "UNAUTHORIZED");
+        throw OAuth2ExceptionHandler.getException(StatusCode.UNAUTHORIZED.getcode(), StatusCode.UNAUTHORIZED.getdesc());
+//        throw new GlobalException(StatusCode.UNAUTHORIZED.getcode(), StatusCode.UNAUTHORIZED.getdesc());
+//        throw OAuth2ExceptionHandler.getException(StatusCode.UNAUTHORIZED.getcode(), StatusCode.UNAUTHORIZED.getdesc());
 
     }
     // @formatter:on
 
     /**
      * 解密字段.
+     *
      * @param userDetail 用户信息
      * @return UserDetail
      */

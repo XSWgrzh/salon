@@ -1,12 +1,11 @@
 package com.salon.handler;
 
+import cn.hutool.json.JSONUtil;
 import com.salon.common.core.model.StatusCode;
 import com.salon.common.core.model.api.Result;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.SneakyThrows;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 
@@ -31,23 +30,30 @@ public class OAuth2ExceptionHandler {
 
     @SneakyThrows
     public static void handleAccessDenied(HttpServletRequest request, HttpServletResponse response, Throwable ex) {
-        if (ex instanceof AccessDeniedException) {
-            Result.of(response, StatusCode.FORBIDDEN.getcode(), "拒绝访问，没有权限");
-        }
+        response.setStatus(StatusCode.SUCCESS.getcode());
+        response.setHeader("Content-Type", "application/json;charset=UTF-8");
+        Result<Object> failed = Result.failed(StatusCode.TOKEN_FAILURE, ex.getMessage());
+        failed.setData(false);
+        response.getWriter().write(JSONUtil.toJsonStr(failed));
     }
 
     @SneakyThrows
     public static void handleAuthentication(HttpServletRequest request, HttpServletResponse response, Throwable ex) {
-        if (ex instanceof OAuth2AuthenticationException) {
-            OAuth2AuthenticationException oAuth2AuthenticationException = (OAuth2AuthenticationException)ex;
-            String message = oAuth2AuthenticationException.getError().getDescription();
-//            int errorCode = Integer.parseInt(oAuth2AuthenticationException.getError().getErrorCode());
-            Result.of(response, StatusCode.UNAUTHORIZED.getcode(), message);
-            return;
-        }
-        if (ex instanceof InsufficientAuthenticationException) {
-            Result.of(response, StatusCode.UNAUTHORIZED.getcode(),"拒绝访问，没有权限");
-        }
+        response.setStatus(StatusCode.SUCCESS.getcode());
+        response.setHeader("Content-Type", "application/json;charset=UTF-8");
+        Result<Object> failed = Result.failed(StatusCode.TOKEN_FAILURE.getcode(), ex.getMessage());
+        failed.setData(false);
+        response.getWriter().write(JSONUtil.toJsonStr(failed));
+//        if (ex instanceof OAuth2AuthenticationException) {
+//            OAuth2AuthenticationException oAuth2AuthenticationException = (OAuth2AuthenticationException) ex;
+//            String message = oAuth2AuthenticationException.getError().getDescription();
+////            int errorCode = Integer.parseInt(oAuth2AuthenticationException.getError().getErrorCode());
+//            Result.of(response, StatusCode.UNAUTHORIZED.getcode(), message);
+//            return;
+//        }
+//        if (ex instanceof InsufficientAuthenticationException) {
+//            Result.of(response, StatusCode.UNAUTHORIZED.getcode(), "拒绝访问，没有权限");
+//        }
     }
 
 }

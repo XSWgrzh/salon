@@ -15,6 +15,9 @@
         <module>salon-common-core</module>
         <module>salon-common-security</module>
         <module>salon-common-redis</module>
+        <module>salon-common-log</module>
+        <module>salon-common-rocketmq</module>
+        <module>salon-common-rpc</module>
     </modules>
 
     <properties>

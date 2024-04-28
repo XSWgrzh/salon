@@ -58,10 +58,6 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.alibaba.cloud</groupId>-->
-        <!--            <artifactId>spring-cloud-starter-dubbo</artifactId>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -133,5 +129,13 @@
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-oauth2-authorization-server</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 </project>

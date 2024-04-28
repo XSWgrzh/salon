@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-import static com.salon.common.core.constant.Constants.RISK;
+import static com.salon.common.core.constant.StringConstants.RISK;
 import static com.salon.common.redis.constant.RedisConstants.REDISS_PROTOCOL_PREFIX;
 import static com.salon.common.redis.constant.RedisConstants.REDIS_PROTOCOL_PREFIX;
 

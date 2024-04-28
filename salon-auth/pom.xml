@@ -48,6 +48,14 @@
             <groupId>com.salon</groupId>
             <artifactId>salon-common-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.salon</groupId>
+            <artifactId>salon-common-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.salon</groupId>
+            <artifactId>salon-common-rpc</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

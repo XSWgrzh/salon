@@ -1,10 +1,14 @@
 package com.salon.common.core.utils;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import static org.springframework.http.HttpHeaders.USER_AGENT;
 
 /**
  * @Author：xieshaowei
@@ -23,6 +27,11 @@ public class RequestUtil {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         Assert.notNull(requestAttributes, "requestAttributes not be null");
         return ((ServletRequestAttributes) requestAttributes).getRequest();
+    }
+
+    public static UserAgent getUserAgent(HttpServletRequest request) {
+
+        return UserAgentUtil.parse(request.getHeader(USER_AGENT));
     }
 
 

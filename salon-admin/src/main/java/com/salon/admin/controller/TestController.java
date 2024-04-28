@@ -1,8 +1,7 @@
 package com.salon.admin.controller;
 
-import com.salon.common.core.exception.GlobalException;
-import com.salon.common.core.model.StatusCode;
 import com.salon.common.core.model.api.Result;
+import com.salon.common.log.annotation.OperateLog;
 import com.salon.utils.UserDetail;
 import com.salon.utils.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +29,14 @@ import java.security.Principal;
 @RequestMapping("test")
 public class TestController {
 
+    @OperateLog(module = "测试模块",operation = "testget")
     @GetMapping
     public Result get() {
         Authentication authentication = UserUtil.getAuthentication();
         String userId = UserUtil.getUserId();
         String userName = UserUtil.getUserName();
-        throw new GlobalException(StatusCode.UNKNOWN.getcode(), StatusCode.UNKNOWN.getdesc());
-        //return Result.success(userName);
+//        throw new GlobalException(StatusCode.UNKNOWN.getcode(), StatusCode.UNKNOWN.getdesc());
+        return Result.success(userName);
 
     }
 

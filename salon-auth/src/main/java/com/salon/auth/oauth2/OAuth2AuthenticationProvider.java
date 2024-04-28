@@ -37,7 +37,7 @@ public class OAuth2AuthenticationProvider {
             throw new UsernameNotFoundException("用户未找到");
         }
         if (!passwordEncoder.matches(password, sysUser.getPassword())) {
-            throw new UsernameNotFoundException("密码不正确！");
+            throw new UsernameNotFoundException("账号密码不正确！");
         }
         UserDetail user = this.convert(sysUser.getId(), sysUser.getUsername(), sysUser.getPassword(), new HashSet<>());
 
